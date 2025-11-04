@@ -36,7 +36,12 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        //recover comments that are validated
+        $article->load(['comments' => function ($query) {
+            $query->where('is_validated', true)->latest();
+        }]);
+
+        return view('articles.show', compact('article'));
     }
 
     /**
