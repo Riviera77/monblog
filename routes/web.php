@@ -28,4 +28,10 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+// accès public à la page blog (liste des articles)
+Route::get('/blog', [ArticleController::class, 'index'])->name('articles.index');
+
+// page de contact (statique ou contrôleur selon ton choix)
+Route::view('/contact', 'contact')->name('contact');
+
 require __DIR__.'/auth.php';
