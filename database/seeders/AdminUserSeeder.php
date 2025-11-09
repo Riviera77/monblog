@@ -14,11 +14,14 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Grey Admin',
-            'email' => 'admin@monblog.com',
-            'password' => Hash::make('monblog47!'),
-            'role' => 'admin',
-        ]);
+        User::updateOrCreate(
+['email' => 'admin@monblog.com'], // ← Critère d'unicité
+    [ // ← Champs à mettre à jour ou créer
+                'name' => 'Grey Admin',
+                'password' => Hash::make('monblog47!'),
+                'is_admin' => true,
+                'role' => 'admin',
+        ]
+);
     }
 }
