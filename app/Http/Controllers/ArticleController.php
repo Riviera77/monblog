@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -12,7 +13,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::with('user')->latest()->paginate(10);
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -28,7 +30,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        ]);
+
+        Article::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('articles.index')->with('success', 'Article créé avec succès.');
     }
 
     /**
@@ -49,7 +62,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -57,7 +70,15 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        ]);
+
+        $article->update($validated);
+
+        return redirect()->route('articles.index')->with('success', 'Article mis à jour.');
+    
     }
 
     /**
@@ -65,6 +86,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('articles.index')->with('success', 'Article supprimé.');
     }
 }
