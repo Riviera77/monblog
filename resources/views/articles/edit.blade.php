@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="text-2xl font-bold mb-4">✏️ Modifier l’article</h1>
 
-<form action="{{ route('articles.update', $article) }}" method="POST"
+<form action="{{ route('admin.articles.update', $article) }}" method="POST"
     class="space-y-4">
     @csrf
     @method('PUT')

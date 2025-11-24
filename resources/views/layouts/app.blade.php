@@ -18,10 +18,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-800 text-white min-h-screen font-sans antialiased">
-    <div class="min-h-screen">
-        @include('layouts.navigation')
+<body
+    class="bg-gray-800 text-white min-h-screen font-sans antialiased flex flex-col">
 
+    <!-- Navigation toujours visible -->
+    @include('layouts.navigation')
+
+    <div class="flex-grow">
         <!-- Page Heading -->
         @isset($header)
         <header class="bg-gray-800 shadow">
@@ -37,6 +40,11 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Page Footer -->
+    <footer>
+        @include('layouts.footer')
+    </footer>
 </body>
 
 </html>
