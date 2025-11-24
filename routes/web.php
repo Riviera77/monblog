@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 
 
@@ -20,8 +21,8 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Auth::user()->is_admin
-            ? app('AdminDashboardController'::class)->index()
-            : app(\App\Http\Controllers\UserDashboardController::class)->index();
+            ? app(AdminDashboardController::class)->index()
+            : app(UserDashboardController::class)->index();
     })->name('dashboard');
     
     // Profil utilisateur

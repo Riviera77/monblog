@@ -12,7 +12,7 @@
             <p class="mt-2 text-lg/8 text-gray-300">Salut, moi c’est Grey –
                 maman solo, dev en reconversion, fondatrice de
                 CodingQueen40 💻🌺.
-                Ici, je partage mes apprentissages sur Laravel, le web, et
+                Ici, je partage mes apprentissages sur le web et
                 l’indépendance des femmes de 40+.</p>
         </div>
         <div
@@ -28,7 +28,7 @@
                 <div class="group relative grow">
                     <h3
                         class="mt-3 text-lg/6 font-semibold text-white group-hover:text-gray-300">
-                        <a href="#">
+                        <a href="{{ route('articles.show', $article) }}">
                             <span class="absolute inset-0"></span>
                             {{ $article->title }}
                         </a>

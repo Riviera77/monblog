@@ -20,7 +20,7 @@
     <h2 class="text-xl font-bold mb-4">🎛️ Administration</h2>
 
     <div class="space-y-4">
-        <a href="{{ route('admin.articles.index') }}"
+        <a href="{{ route('articles.index') }}"
             class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 inline-block">
             ✍️ Gérer les articles
         </a>
@@ -30,7 +30,7 @@
     <ul class="space-y-2">
         @foreach($latestArticles as $article)
         <li class="bg-white p-4 rounded shadow text-black">
-            <a href="{{ route('articles.edit', $article) }}"
+            <a href="{{ route('admin.articles.edit', $article) }}"
                 class="text-purple-700 font-semibold hover:underline">
                 {{ $article->title }}
             </a>
